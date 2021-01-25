@@ -73,7 +73,7 @@ jobs:
         TargetPlatform: ${{ matrix.targetplatform }}
 
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v2
       with:
         name: TM-Browser
         path: |
