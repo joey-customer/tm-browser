@@ -77,5 +77,5 @@ jobs:
       with:
         name: TM-Browser
         path: |
-          TMBrowserWPF\bin\${{ matrix.targetplatform }}\Debug\netcoreapp3.1\TMBrowserWPF.exe
-          TMBrowserWPF\bin\${{ matrix.targetplatform }}\Debug\netcoreapp3.1\TMBrowserWPF.dll
+          TMBrowserWPF\bin\${{ matrix.targetplatform }}\Debug\netcoreapp3.1\*.exe
+          TMBrowserWPF\bin\${{ matrix.targetplatform }}\Debug\netcoreapp3.1\*.dll
