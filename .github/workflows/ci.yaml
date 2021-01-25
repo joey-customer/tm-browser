@@ -76,4 +76,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: TM-Browser
-        path: TMBrowserWPF\bin\x64\Debug\netcoreapp3.1\TMBrowserWPF.exe
+        path: TMBrowserWPF\bin\${{ matrix.targetplatform }}\Debug\netcoreapp3.1\TMBrowserWPF.exe
