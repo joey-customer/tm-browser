@@ -21,7 +21,7 @@ jobs:
 
     strategy:
       matrix:
-        targetplatform: [x86, x64]
+        targetplatform: [x64]
 
     runs-on: windows-latest
 
@@ -32,6 +32,7 @@ jobs:
       Solution_Path: TMBrowserWPF.sln
       #Test_Project_Path: MyWpfApp.Tests\MyWpfApp.Tests.csproj
       Wpf_Project_Path: TMBrowserWPF\TMBrowserWPF.csproj
+      TargetPlatform: ${{ matrix.targetplatform }}
 
     steps:
     - name: Checkout
@@ -76,5 +77,5 @@ jobs:
       with:
         name: TM-Browser
         path: |
-          TMBrowserWPF\bin\${{ env.TargetPlatform }}\Debug\netcoreapp3.1\*.exe
-          TMBrowserWPF\bin\${{ env.TargetPlatform }}\Debug\netcoreapp3.1\*.dll
+          TMBrowserWPF\bin\x64\Debug\netcoreapp3.1\*.exe
+          TMBrowserWPF\bin\x64\Debug\netcoreapp3.1\*.dll
