@@ -99,7 +99,7 @@ jobs:
 
     # Archive the package
     - name: Create archive
-      run: Compress-Archive -Path TMBrowserWPF\bin\${{ matrix.targetplatform }}\Debug\netcoreapp3.1\*.exe -DestinationPath $env:App_Packages_Archive
+      run: Compress-Archive -Path TMBrowserWPF\bin\${{ matrix.targetplatform }}\Debug\netcoreapp3.1\*.exe, TMBrowserWPF\bin\${{ matrix.targetplatform }}\Debug\netcoreapp3.1\*.dll -DestinationPath $env:App_Packages_Archive
 
     # Create the release:  https://github.com/actions/create-release
     - name: Create release
