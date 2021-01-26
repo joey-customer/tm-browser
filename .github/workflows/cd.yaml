@@ -46,6 +46,7 @@ jobs:
     runs-on: windows-latest
 
     env:
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
       App_Packages_Archive: AppPackages.zip
       App_Packages_Directory: AppPackages
       SigningCertificate: GitHubActionsDemo.pfx
