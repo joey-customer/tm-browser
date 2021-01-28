@@ -73,7 +73,7 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: TM-Browser
+        name: TM-Browser-${{ matrix.targetplatform }}
         path: |
           TMBrowser\bin\Debug\*.exe
           TMBrowser\bin\Debug\*.dll
