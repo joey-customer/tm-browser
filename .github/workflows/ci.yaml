@@ -30,8 +30,6 @@ jobs:
       App_Packages_Directory: AppPackages
       SigningCertificate: GitHubActionsDemo.pfx
       Solution_Path: TMBrowserWPF.sln
-      #Test_Project_Path: MyWpfApp.Tests\MyWpfApp.Tests.csproj
-      Wpf_Project_Path: TMBrowserWPF\TMBrowserWPF.csproj
       TargetPlatform: ${{ matrix.targetplatform }}
 
     steps:
@@ -77,5 +75,5 @@ jobs:
       with:
         name: TM-Browser
         path: |
-          TMBrowserWPF\bin\Debug\*.exe
-          TMBrowserWPF\bin\Debug\*.dll
+          TMBrowser\bin\Debug\*.exe
+          TMBrowser\bin\Debug\*.dll
