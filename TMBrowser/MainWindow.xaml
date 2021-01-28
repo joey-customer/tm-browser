@@ -4,9 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TMBrowser"
+        xmlns:eo="http://schemas.essentialobjects.com/wpf/"
+        Loaded="Window_Loaded"
         mc:Ignorable="d"
+        WindowState="Maximized"
+        WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <DockPanel>
+            <eo:WebControl>
+                <eo:WebControl.WebView>
+                    <eo:WebView Url="www.github.com">
+                    </eo:WebView>
+                </eo:WebControl.WebView>
+            </eo:WebControl>
+        </DockPanel>
     </Grid>
 </Window>

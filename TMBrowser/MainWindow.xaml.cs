@@ -24,5 +24,13 @@ namespace TMBrowser
         {
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            //webView.Source = new Uri("https://www.google.com");
+            //webView.BringIntoView();
+            //webView.Source = "https://www.google.com";
+            //Browser.Address = "https://github.com/cefsharp/CefSharp/wiki/Quick-Start";
+        }
     }
 }
