@@ -21,7 +21,7 @@ jobs:
 
     strategy:
       matrix:
-        targetplatform: [x64]
+        targetplatform: [x64, x86]
 
     runs-on: windows-latest
 
@@ -77,5 +77,5 @@ jobs:
       with:
         name: TM-Browser
         path: |
-          TMBrowserWPF\bin\${{ matrix.targetplatform }}\Debug\netcoreapp3.1\*.exe
-          TMBrowserWPF\bin\${{ matrix.targetplatform }}\Debug\netcoreapp3.1\*.dll
+          TMBrowserWPF\bin\Debug\*.exe
+          TMBrowserWPF\bin\Debug\*.dll
