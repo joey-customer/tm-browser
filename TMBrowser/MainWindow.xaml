@@ -4,20 +4,94 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TMBrowser"
-        xmlns:eo="http://schemas.essentialobjects.com/wpf/"
+        xmlns:uc="clr-namespace:TMBrowser.UserControls"
         Loaded="Window_Loaded"
         mc:Ignorable="d"
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="450" Width="800">
+        Title="ระบบงาน..." Height="450" Width="800">
     <Grid>
-        <DockPanel>
-            <eo:WebControl>
-                <eo:WebControl.WebView>
-                    <eo:WebView Url="www.github.com">
-                    </eo:WebView>
-                </eo:WebControl.WebView>
-            </eo:WebControl>
-        </DockPanel>
+        <TabControl>
+            <TabControl.Resources>
+                <Style x:Key="MyBtnStyle" TargetType="{x:Type Button}">
+                    <Setter Property="FontSize" Value="12" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="Foreground" Value="Red" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="Width" Value="20" />
+                    <Setter Property="Content" Value="X"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="BorderBrush" Value="#FF2B3C59"/>
+                            <Setter Property="Background" Value="Green"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="BorderThickness" Value="2"/>
+                            <Setter Property="BorderBrush" Value="#FF2B3C59"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+                
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Gainsboro" CornerRadius="4,4,0,0" Margin="2,0">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="GhostWhite" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Border" Property="Background" Value="White" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            
+            <TabItem>
+                <TabItem.Header>
+                    <Grid VerticalAlignment="Center" Height="Auto">
+                        <!-- Using default column and row configurations -->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Hello world" Height="Auto" 
+                                   Margin="3"
+                                   VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
+
+                        <Button Width="20" Height="20" Style="{StaticResource MyBtnStyle}" 
+                                Margin="3"
+                                ToolTip="ปิด"
+                                VerticalAlignment="Center"
+                                Background="Transparent"
+                                Grid.Row="0" Grid.Column="1">
+                            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image HorizontalAlignment="Center"
+                                       Source="/TMBrowser;component/Pictures/close.png"
+                                       Height="16" Width="16" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                </TabItem.Header>
+                <uc:UWebView></uc:UWebView>
+                <!-- Label Content="Content goes here..." / -->
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
