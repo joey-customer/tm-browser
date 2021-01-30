@@ -11,7 +11,7 @@
         WindowStartupLocation="CenterScreen"
         Title="ระบบงาน..." Height="450" Width="800">
     <Grid>
-        <TabControl>
+        <TabControl ItemsSource="{Binding TabItems}">
             <TabControl.Resources>
                 <Style x:Key="MyBtnStyle" TargetType="{x:Type Button}">
                     <Setter Property="FontSize" Value="12" />
@@ -57,11 +57,10 @@
                     </Setter>
                 </Style>
             </TabControl.Resources>
-            
+<!--            
             <TabItem>
                 <TabItem.Header>
                     <Grid VerticalAlignment="Center" Height="Auto">
-                        <!-- Using default column and row configurations -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="30"/>
@@ -90,8 +89,8 @@
                     </Grid>
                 </TabItem.Header>
                 <uc:UWebView></uc:UWebView>
-                <!-- Label Content="Content goes here..." / -->
             </TabItem>
+-->            
         </TabControl>
     </Grid>
 </Window>

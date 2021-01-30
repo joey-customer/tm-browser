@@ -113,6 +113,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ModelViews\MVBase.cs" />
+    <Compile Include="ModelViews\MVBrowser.cs" />
+    <Compile Include="ModelViews\MVTabItem.cs" />
     <Compile Include="UserControls\UWebView.xaml.cs">
       <DependentUpon>UWebView.xaml</DependentUpon>
     </Compile>
