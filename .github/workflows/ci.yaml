@@ -82,3 +82,4 @@ jobs:
         path: |
           TMBrowser\bin\Debug\*.exe
           TMBrowser\bin\Debug\*.dll
+          TMBrowser\bin\Debug\Pictures\*.png
