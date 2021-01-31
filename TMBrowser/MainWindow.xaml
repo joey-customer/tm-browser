@@ -3,19 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TMBrowser"
-        xmlns:uc="clr-namespace:TMBrowser.UserControls"
         Loaded="Window_Loaded"
         mc:Ignorable="d"
         WindowState="Maximized"
+        Name="winMain"
         WindowStartupLocation="CenterScreen"
+        DataContext="{Binding ElementName=winMain, Path=Browser}"
         Title="ระบบงาน..." Height="450" Width="800">
-    <Grid>
-        <TabControl ItemsSource="{Binding TabItems}">
+    <DockPanel LastChildFill="True">
+        <TabControl ItemsSource="{Binding TabItems}" 
+                    DockPanel.Dock="Top" Name="tabMain" SizeChanged="TabMain_SizeChanged">
             <TabControl.Resources>
                 <Style x:Key="MyBtnStyle" TargetType="{x:Type Button}">
                     <Setter Property="FontSize" Value="12" />
-                    <Setter Property="FontWeight" Value="Bold" />
                     <Setter Property="Foreground" Value="Red" />
                     <Setter Property="BorderThickness" Value="0" />
                     <Setter Property="Width" Value="20" />
@@ -46,7 +46,7 @@
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
-                                        <Setter TargetName="Border" Property="Background" Value="GhostWhite" />
+                                        <Setter TargetName="Border" Property="Background" Value="Gray" />
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="False">
                                         <Setter TargetName="Border" Property="Background" Value="White" />
@@ -57,9 +57,9 @@
                     </Setter>
                 </Style>
             </TabControl.Resources>
-<!--            
-            <TabItem>
-                <TabItem.Header>
+
+            <TabControl.ItemTemplate>
+                <DataTemplate>
                     <Grid VerticalAlignment="Center" Height="Auto">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -70,7 +70,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="Hello world" Height="Auto" 
+                        <TextBlock Text="{Binding Header}" Height="Auto" 
                                    Margin="3"
                                    VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
 
@@ -87,10 +87,21 @@
                             </StackPanel>
                         </Button>
                     </Grid>
-                </TabItem.Header>
-                <uc:UWebView></uc:UWebView>
-            </TabItem>
--->            
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+
+            <TabControl.ItemContainerStyle>
+                <Style TargetType="TabItem">
+                    <Setter Property="Header" Value="{Binding Self}" />
+                    <Setter Property="Content" Value="{Binding Self}" />
+                </Style>
+            </TabControl.ItemContainerStyle>
+            
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding ContentControl}"/>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
         </TabControl>
-    </Grid>
+    </DockPanel>
 </Window>

@@ -17,5 +17,10 @@ namespace TMBrowser.ModelViews
         }
 
         #endregion INotifyPropertyChanged implementation
+
+        public void NotifyPropertyChange(string propertyName)
+        {
+            Notify(propertyName);
+        }
     }
 }

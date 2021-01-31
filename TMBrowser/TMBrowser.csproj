@@ -115,6 +115,7 @@
     </ApplicationDefinition>
     <Compile Include="ModelViews\MVBase.cs" />
     <Compile Include="ModelViews\MVBrowser.cs" />
+    <Compile Include="ModelViews\MVWebView.cs" />
     <Compile Include="ModelViews\MVTabItem.cs" />
     <Compile Include="UserControls\UWebView.xaml.cs">
       <DependentUpon>UWebView.xaml</DependentUpon>
@@ -217,6 +218,9 @@
     <Resource Include="Themes\Metro\HowToApplyTheme.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Pictures\home.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="LogoRTA.ico" />
     <Content Include="Pictures\backward.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

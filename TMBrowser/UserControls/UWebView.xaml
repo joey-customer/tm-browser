@@ -3,25 +3,38 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TMBrowser.UserControls"
              xmlns:eo="http://schemas.essentialobjects.com/wpf/"
              mc:Ignorable="d" 
+             Name="uctlWebView"
+             DataContext="{Binding ElementName=uctlWebView, Path=WebviewContext}"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <DockPanel LastChildFill="True">
-            <Grid VerticalAlignment="Center" DockPanel.Dock="Top">
-                <!-- Using default column and row configurations -->
+    
+    <DockPanel LastChildFill="True" Background="White">
+        <Border DockPanel.Dock="Top" BorderThickness="1,0,0,1" BorderBrush="WhiteSmoke">
+            <Grid VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50" />
                     <ColumnDefinition Width="50" />
                     <ColumnDefinition Width="50" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-
+                
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Column="0" Grid.Row="0"
+                <Button Grid.Column="0" Grid.Row="0" Name="btnHome" Click="BtnHome_Click"
+                        ToolTip="หน้าหลัก"
+                        Background="Transparent"
+                        Margin="0,2,2,2">
+                    <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Image HorizontalAlignment="Center"
+                                       Source="/TMBrowser;component/Pictures/home.png"
+                                       Height="25" Width="25" />
+                    </StackPanel>
+                </Button>
+                <Button Grid.Column="1" Grid.Row="0" Name="btnBackward" Click="BtnBackward_Click"
+                        IsEnabled="{Binding CanBackward}"
                         ToolTip="ย้อนกลับ"
                         Background="Transparent"
                         Margin="2,2,2,2">
@@ -31,7 +44,8 @@
                                        Height="25" Width="25" />
                     </StackPanel>
                 </Button>
-                <Button Grid.Column="1" Grid.Row="0" 
+                <Button Grid.Column="2" Grid.Row="0" Name="btnForward" Click="BtnForward_Click"
+                        IsEnabled="{Binding CanForward}"
                         Background="Transparent" 
                         ToolTip="ถัดไป"
                         Margin="2,2,2,2">
@@ -41,17 +55,20 @@
                                        Height="25" Width="25" />
                     </StackPanel>
                 </Button>
-                <TextBox Grid.Column="2" Grid.Row="0" 
+                <TextBox Grid.Column="3" Grid.Row="0" 
                          IsReadOnly="True"
+                         Text="{Binding CurrentUrl}"
                          Margin="2,2,2,2" VerticalContentAlignment="Center"/>
             </Grid>
-            
-            <eo:WebControl DockPanel.Dock="Top">
-                <eo:WebControl.WebView>
-                    <eo:WebView Url="www.google.com">
-                    </eo:WebView>
-                </eo:WebControl.WebView>
-            </eo:WebControl>
-        </DockPanel>
-    </Grid>
+        </Border>
+        <eo:WebControl Name="webControl" Background="AliceBlue">
+            <eo:WebControl.WebView>
+                <eo:WebView x:Name="webview" 
+                            UrlChanged="Webview_UrlChanged"
+                            CanGoBackChanged="Webview_CanGoBackChanged"
+                            CanGoForwardChanged="Webview_CanGoForwardChanged">
+                </eo:WebView>
+            </eo:WebControl.WebView>
+        </eo:WebControl>
+    </DockPanel>
 </UserControl>
