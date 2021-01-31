@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Drawing;
+using System.IO;
+using System.Windows.Media.Imaging;
+using System.Drawing.Imaging;
 
 using TMBrowser.ModelViews;
-using System.Windows.Media.Imaging;
-using System.IO;
-using System.Drawing.Imaging;
 using EO.WebBrowser;
 
 namespace TMBrowser.UserControls
@@ -92,7 +91,7 @@ namespace TMBrowser.UserControls
             }
         }
 
-        private void updateLoading()
+        private void UpdateLoading()
         {
             TabItem.SpinningIconVisibility = Visibility.Visible;
             TabItem.FavIconVisibility = Visibility.Hidden;
@@ -106,7 +105,7 @@ namespace TMBrowser.UserControls
         private void BtnHome_Click(object sender, RoutedEventArgs e)
         {
             webview.Url = mwv.HomeUrl;
-            updateLoading();
+            UpdateLoading();
         }
 
         private void BtnForward_Click(object sender, RoutedEventArgs e)
@@ -156,7 +155,7 @@ namespace TMBrowser.UserControls
                 return;
             }
 
-            updateLoading();
+            UpdateLoading();
         }
 
         private void Webview_LoadCompleted(object sender, EO.WebBrowser.LoadCompletedEventArgs e)
@@ -191,6 +190,11 @@ namespace TMBrowser.UserControls
 
                 return bmpImgage;
             }
+        }
+
+        private void BtnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            webview.Reload();
         }
     }
 }

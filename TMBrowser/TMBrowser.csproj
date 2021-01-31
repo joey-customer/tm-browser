@@ -228,6 +228,9 @@
     <Content Include="Pictures\home.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Pictures\refresh.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="LogoRTA.ico" />
     <Content Include="Pictures\backward.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

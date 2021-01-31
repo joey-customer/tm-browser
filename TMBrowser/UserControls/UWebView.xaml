@@ -16,6 +16,7 @@
                     <ColumnDefinition Width="50" />
                     <ColumnDefinition Width="50" />
                     <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="50" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 
@@ -33,7 +34,17 @@
                                        Height="25" Width="25" />
                     </StackPanel>
                 </Button>
-                <Button Grid.Column="1" Grid.Row="0" Name="btnBackward" Click="BtnBackward_Click"
+                <Button Grid.Column="1" Grid.Row="0" Name="BtnRefresh" Click="BtnRefresh_Click"
+                        ToolTip="รีเฟรช"
+                        Background="Transparent"
+                        Margin="0,2,2,2">
+                    <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Image HorizontalAlignment="Center"
+                                       Source="/TMBrowser;component/Pictures/refresh.png"
+                                       Height="25" Width="25" />
+                    </StackPanel>
+                </Button>                
+                <Button Grid.Column="2" Grid.Row="0" Name="btnBackward" Click="BtnBackward_Click"
                         IsEnabled="{Binding CanBackward}"
                         ToolTip="ย้อนกลับ"
                         Background="Transparent"
@@ -44,7 +55,7 @@
                                        Height="25" Width="25" />
                     </StackPanel>
                 </Button>
-                <Button Grid.Column="2" Grid.Row="0" Name="btnForward" Click="BtnForward_Click"
+                <Button Grid.Column="3" Grid.Row="0" Name="btnForward" Click="BtnForward_Click"
                         IsEnabled="{Binding CanForward}"
                         Background="Transparent" 
                         ToolTip="ถัดไป"
@@ -55,7 +66,7 @@
                                        Height="25" Width="25" />
                     </StackPanel>
                 </Button>
-                <TextBox Grid.Column="3" Grid.Row="0" 
+                <TextBox Grid.Column="4" Grid.Row="0" 
                          IsReadOnly="True"
                          Text="{Binding CurrentUrl}"
                          Margin="2,2,2,2" VerticalContentAlignment="Center"/>
