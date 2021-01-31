@@ -1,28 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using TMBrowser.ModelViews;
 
 namespace TMBrowser
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly MVBrowser browser = new MVBrowser();
+
+        public MVBrowser Browser { get; set; }
+
         public MainWindow()
         {
+            Browser = browser;
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            //40 - height of nagivate buttons and text box
+            browser.InitStartTab(tabMain.ActualHeight - 40);
+            tabMain.SelectedIndex = 0;
+        }
+
+        private void TabMain_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            browser.NotifyHeightChanged(e.NewSize.Height);
+        }
+
+        //private void MyGif_MediaEnded(object sender, RoutedEventArgs e)
+        //{
+        //    myGif.Position = new TimeSpan(0, 0, 1);
+        //    myGif.Play();
+        //}
     }
 }

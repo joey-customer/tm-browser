@@ -3,10 +3,116 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TMBrowser"
+        Loaded="Window_Loaded"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        WindowState="Maximized"
+        Name="winMain"
+        WindowStartupLocation="CenterScreen"
+        DataContext="{Binding ElementName=winMain, Path=Browser}"
+        Title="ระบบงาน..." Height="450" Width="800">
+    <DockPanel LastChildFill="True">
+        <TabControl ItemsSource="{Binding TabItems}" 
+                    DockPanel.Dock="Top" Name="tabMain" SizeChanged="TabMain_SizeChanged">
+            <TabControl.Resources>
+                <Style x:Key="MyBtnStyle" TargetType="{x:Type Button}">
+                    <Setter Property="FontSize" Value="12" />
+                    <Setter Property="Foreground" Value="Red" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="Width" Value="20" />
+                    <Setter Property="Content" Value="X"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="BorderBrush" Value="#FF2B3C59"/>
+                            <Setter Property="Background" Value="Green"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="BorderThickness" Value="2"/>
+                            <Setter Property="BorderBrush" Value="#FF2B3C59"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+                
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Gainsboro" CornerRadius="0,4,4,0" Margin="2,0">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="Gray" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Border" Property="Background" Value="White" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid VerticalAlignment="Center" Height="Auto">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Image HorizontalAlignment="Center"
+                               Visibility="{Binding SpinningIconVisibility}"
+                               Grid.Row="0" Grid.Column="0" Source="/TMBrowser;component/Pictures/clock.png"
+                               Height="20" Width="20" />
+
+                        <ContentControl Visibility="{Binding FavIconVisibility}"
+                                        Content="{Binding FavIconImage}" 
+                                        Grid.Row="0" Grid.Column="0"
+                                        Height="16" Width="16"/>
+
+                        <TextBlock Text="{Binding Header}" Height="Auto" 
+                                   Margin="3"
+                                   VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+
+                        <Button Width="20" Height="20" Style="{StaticResource MyBtnStyle}" 
+                                Margin="3"
+                                ToolTip="ปิด"
+                                VerticalAlignment="Center"
+                                Background="Transparent"
+                                Grid.Row="0" Grid.Column="2">
+                            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Image HorizontalAlignment="Center"
+                                       Source="/TMBrowser;component/Pictures/close.png"
+                                       Height="16" Width="16" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+
+            <TabControl.ItemContainerStyle>
+                <Style TargetType="TabItem">
+                    <Setter Property="Header" Value="{Binding Self}" />
+                    <Setter Property="Content" Value="{Binding Self}" />
+                </Style>
+            </TabControl.ItemContainerStyle>
+            
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding ContentControl}"/>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+    </DockPanel>
 </Window>
