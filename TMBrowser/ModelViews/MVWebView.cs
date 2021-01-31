@@ -1,5 +1,5 @@
 ﻿using System;
-using TMBrowser.UserControls;
+using System.Windows;
 
 namespace TMBrowser.ModelViews
 {
@@ -9,5 +9,7 @@ namespace TMBrowser.ModelViews
         public bool CanBackward { get; set; }
         public string HomeUrl { get; set; }
         public string CurrentUrl { get; set; }
+        public Visibility CertificateOKVisibility { set; get; }
+        public Visibility CertificateErrorVisibility { set; get; }
     }
 }

@@ -66,15 +66,33 @@
                                        Height="25" Width="25" />
                     </StackPanel>
                 </Button>
-                <TextBox Grid.Column="4" Grid.Row="0" 
+                <DockPanel LastChildFill="True" Grid.Column="4" Grid.Row="0"
+                           Margin="20,0,0,0">
+                    <StackPanel DockPanel.Dock="Left" Orientation="Vertical" VerticalAlignment="Center"
+                            Background="Transparent" Width="25"
+                            Margin="2,2,1,2">
+                        <Image 
+                            Height="20" Width="20"
+                            Visibility="{Binding CertificateOKVisibility}"
+                            Source="/TMBrowser;component/Pictures/shield.png"
+                            Focusable="False" />
+                        <Image 
+                            Height="20" Width="20"
+                            Visibility="{Binding CertificateErrorVisibility}"
+                            Source="/TMBrowser;component/Pictures/warning.png"
+                            Focusable="False" />                        
+                    </StackPanel>
+                    <TextBox DockPanel.Dock="Left" x:Name="TxtUrl"
                          IsReadOnly="True"
                          Text="{Binding CurrentUrl}"
-                         Margin="2,2,2,2" VerticalContentAlignment="Center"/>
+                         Margin="0,2,2,2" VerticalContentAlignment="Center"/>
+                </DockPanel>
             </Grid>
         </Border>
         <eo:WebControl Name="webControl" Background="AliceBlue">
             <eo:WebControl.WebView>
                 <eo:WebView x:Name="webview" 
+                            CertificateError="Webview_CertificateError"
                             BeforeSendHeaders="Webview_BeforeSendHeaders"
                             ScriptCallDone="Webview_ScriptCallDone"
                             FaviconChanged="Webview_FaviconChanged"

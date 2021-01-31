@@ -13,6 +13,7 @@ namespace TMBrowser.UserControls
     public partial class UWebView : UserControl
     {
         private readonly MVWebView mwv = new MVWebView();
+        private bool isCertificateError = false;
 
         #region Url
 
@@ -60,8 +61,11 @@ namespace TMBrowser.UserControls
         {
             mwv.CanBackward = false;
             mwv.CanForward = false;
+            SetCertificateIcon("init");
 
             InitializeComponent();
+
+            isCertificateError = false;
         }
 
         public MVWebView WebviewContext
@@ -93,13 +97,15 @@ namespace TMBrowser.UserControls
 
         private void UpdateLoading()
         {
+            isCertificateError = false;
+
             TabItem.SpinningIconVisibility = Visibility.Visible;
             TabItem.FavIconVisibility = Visibility.Hidden;
             TabItem.Header = "กำลังโหลดข้อมูล...";
 
             TabItem.NotifyPropertyChange("FavIconVisibility");
             TabItem.NotifyPropertyChange("SpinningIconVisibility");
-            TabItem.NotifyPropertyChange("Header");
+            TabItem.NotifyPropertyChange("Header");            
         }
 
         private void BtnHome_Click(object sender, RoutedEventArgs e)
@@ -116,6 +122,11 @@ namespace TMBrowser.UserControls
         private void BtnBackward_Click(object sender, RoutedEventArgs e)
         {
             webview.GoBack();
+        }
+
+        private void BtnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            webview.Reload();
         }
 
         private void Webview_CanGoBackChanged(object sender, EventArgs e)
@@ -167,6 +178,16 @@ namespace TMBrowser.UserControls
             TabItem.NotifyPropertyChange("FavIconVisibility");
             TabItem.NotifyPropertyChange("SpinningIconVisibility");
             TabItem.NotifyPropertyChange("Header");
+
+            if (isCertificateError)
+            {
+                SetCertificateIcon("error");
+            }
+            else
+            {
+                //TODO : Should also check if http or https
+                SetCertificateIcon("ok");
+            }
         }
 
         private void Webview_FaviconChanged(object sender, EventArgs e)
@@ -192,9 +213,32 @@ namespace TMBrowser.UserControls
             }
         }
 
-        private void BtnRefresh_Click(object sender, RoutedEventArgs e)
+        private void Webview_CertificateError(object sender, CertificateErrorEventArgs e)
         {
-            webview.Reload();
+            isCertificateError = true;
+            e.Continue();
+        }
+
+        private void SetCertificateIcon(string flag)
+        {
+            if (flag.Equals("error"))
+            {
+                mwv.CertificateErrorVisibility = Visibility.Visible;
+                mwv.CertificateOKVisibility = Visibility.Collapsed;
+            }
+            else if (flag.Equals("ok"))
+            {
+                mwv.CertificateErrorVisibility = Visibility.Collapsed;
+                mwv.CertificateOKVisibility = Visibility.Visible;
+            }
+            else if (flag.Equals("init"))
+            {
+                mwv.CertificateErrorVisibility = Visibility.Collapsed;
+                mwv.CertificateOKVisibility = Visibility.Collapsed;
+            }
+
+            mwv.NotifyPropertyChange("CertificateErrorVisibility");
+            mwv.NotifyPropertyChange("CertificateOKVisibility");
         }
     }
 }
