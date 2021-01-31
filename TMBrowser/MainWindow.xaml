@@ -70,13 +70,11 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-
-                        <!--<Image HorizontalAlignment="Center"
+                        
+                        <Image HorizontalAlignment="Center"
                                Visibility="{Binding SpinningIconVisibility}"
-                               xmlns:gif="http://wpfanimatedgif.codeplex.com"
-                               gif:ImageBehavior.RepeatBehavior="300x"
-                               Grid.Row="0" Grid.Column="0" gif:ImageBehavior.AnimatedSource="/TMBrowser;component/Pictures/circles-menu-1.gif"
-                               Height="16" Width="16" />-->
+                               Grid.Row="0" Grid.Column="0" Source="/TMBrowser;component/Pictures/clock.png"
+                               Height="20" Width="20" />
 
                         <ContentControl Visibility="{Binding FavIconVisibility}"
                                         Content="{Binding FavIconImage}" 

@@ -219,7 +219,7 @@
     <Resource Include="Themes\Metro\HowToApplyTheme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Pictures\circles-menu-1.gif">
+    <Content Include="Pictures\clock.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Pictures\home.png">
