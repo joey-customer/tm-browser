@@ -116,5 +116,20 @@ namespace TMBrowser.UserControls
             mwv.CurrentUrl = webview.Url;
             mwv.NotifyPropertyChange("CurrentUrl");
         }
+
+        private void Webview_LoadCompleted(object sender, EO.WebBrowser.LoadCompletedEventArgs e)
+        {
+            //int i = 0;
+        }
+
+        private void Webview_BeforeNavigate(object sender, EO.WebBrowser.BeforeNavigateEventArgs e)
+        {
+            //int i = 0;
+        }
+
+        private void Webview_LoadFailed(object sender, EO.WebBrowser.LoadFailedEventArgs e)
+        {
+            //int i = 0;
+        }
     }
 }

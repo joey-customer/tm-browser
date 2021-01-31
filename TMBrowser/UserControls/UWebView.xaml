@@ -64,6 +64,9 @@
         <eo:WebControl Name="webControl" Background="AliceBlue">
             <eo:WebControl.WebView>
                 <eo:WebView x:Name="webview" 
+                            BeforeNavigate="Webview_BeforeNavigate"
+                            LoadFailed="Webview_LoadFailed"
+                            LoadCompleted="Webview_LoadCompleted"
                             UrlChanged="Webview_UrlChanged"
                             CanGoBackChanged="Webview_CanGoBackChanged"
                             CanGoForwardChanged="Webview_CanGoForwardChanged">
