@@ -1,7 +1,13 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Drawing;
+
 using TMBrowser.ModelViews;
+using System.Windows.Media.Imaging;
+using System.IO;
+using System.Drawing.Imaging;
+using EO.WebBrowser;
 
 namespace TMBrowser.UserControls
 {
@@ -61,15 +67,17 @@ namespace TMBrowser.UserControls
 
         public MVWebView WebviewContext
         {
-            get 
+            get
             {
                 return mwv;
             }
 
-            set 
-            { 
+            set
+            {
             }
         }
+
+        public MVTabItem TabItem { set; get; }
 
         public string HomeUrl
         {
@@ -84,9 +92,21 @@ namespace TMBrowser.UserControls
             }
         }
 
+        private void updateLoading()
+        {
+            TabItem.SpinningIconVisibility = Visibility.Visible;
+            TabItem.FavIconVisibility = Visibility.Hidden;
+            TabItem.Header = "กำลังโหลดข้อมูล...";
+
+            TabItem.NotifyPropertyChange("FavIconVisibility");
+            TabItem.NotifyPropertyChange("SpinningIconVisibility");
+            TabItem.NotifyPropertyChange("Header");
+        }
+
         private void BtnHome_Click(object sender, RoutedEventArgs e)
         {
             webview.Url = mwv.HomeUrl;
+            updateLoading();
         }
 
         private void BtnForward_Click(object sender, RoutedEventArgs e)
@@ -117,19 +137,60 @@ namespace TMBrowser.UserControls
             mwv.NotifyPropertyChange("CurrentUrl");
         }
 
-        private void Webview_LoadCompleted(object sender, EO.WebBrowser.LoadCompletedEventArgs e)
+        private void Webview_ScriptCallDone(object sender, EO.WebBrowser.ScriptCallDoneEventArgs e)
         {
-            //int i = 0;
         }
 
-        private void Webview_BeforeNavigate(object sender, EO.WebBrowser.BeforeNavigateEventArgs e)
+        private void Webview_BeforeSendHeaders(object sender, EO.WebBrowser.RequestEventArgs e)
         {
-            //int i = 0;
         }
 
         private void Webview_LoadFailed(object sender, EO.WebBrowser.LoadFailedEventArgs e)
         {
-            //int i = 0;
+        }
+
+        private void Webview_BeforeNavigate(object sender, EO.WebBrowser.BeforeNavigateEventArgs e)
+        {
+            if (e.NavigationType == NavigationType.Other)
+            {
+                return;
+            }
+
+            updateLoading();
+        }
+
+        private void Webview_LoadCompleted(object sender, EO.WebBrowser.LoadCompletedEventArgs e)
+        {
+            TabItem.SpinningIconVisibility = Visibility.Hidden;
+            TabItem.FavIconVisibility = Visibility.Visible;
+            TabItem.Header = webview.Title;
+
+            TabItem.NotifyPropertyChange("FavIconVisibility");
+            TabItem.NotifyPropertyChange("SpinningIconVisibility");
+            TabItem.NotifyPropertyChange("Header");
+        }
+
+        private void Webview_FaviconChanged(object sender, EventArgs e)
+        {
+            TabItem.FavIconImage.Source = GetImageSource(webview.Favicon);
+            TabItem.NotifyPropertyChange("FavIconImage");
+        }
+
+        private BitmapImage GetImageSource(System.Drawing.Image image)
+        {
+            using (var stream = new MemoryStream())
+            {
+                image.Save(stream, ImageFormat.Bmp);
+                stream.Position = 0;
+
+                var bmpImgage = new BitmapImage();
+                bmpImgage.BeginInit();
+                bmpImgage.CacheOption = BitmapCacheOption.OnLoad;
+                bmpImgage.StreamSource = stream;
+                bmpImgage.EndInit();
+
+                return bmpImgage;
+            }
         }
     }
 }

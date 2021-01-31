@@ -14,10 +14,10 @@ namespace TMBrowser.ModelViews
 
         public void InitStartTab(double areaHeight)
         {
-            var item = new MVTabItem("Royal Thai Army", "https://rta.mi.th/", areaHeight, homeUrl);
-            tabItems.Add(item);
+            //var item = new MVTabItem("Royal Thai Army", "https://rta.mi.th/", areaHeight, homeUrl);
+            //tabItems.Add(item);
 
-            item = new MVTabItem("Google", "www.google.com", areaHeight, homeUrl);
+            var item = new MVTabItem("Google", "www.google.com", areaHeight, homeUrl);
             tabItems.Add(item);
         }
 
