@@ -12,6 +12,7 @@ namespace TMBrowser.ModelViews
         public Visibility SpinningIconVisibility { get; set; }
         public Visibility FavIconVisibility { get; set; }
         public Image FavIconImage { get; set; }
+        public MVTabItem RefKey { get; set; }
 
         public MVTabItem(String header, String url, double areaHeight, String homeUrl)
         {
@@ -20,6 +21,7 @@ namespace TMBrowser.ModelViews
             FavIconImage = new Image();
 
             Header = header;
+            RefKey = this;
 
             //Each tab item has it own web view user control
             UWebView wv = new UWebView()
