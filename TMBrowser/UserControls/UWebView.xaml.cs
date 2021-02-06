@@ -12,6 +12,10 @@ namespace TMBrowser.UserControls
 {
     public partial class UWebView : UserControl
     {
+        public delegate void NewWindowCreateEvent(object sender, NewWindowEventArgs e);
+
+        private NewWindowCreateEvent windowCreateEvt = null;
+
         private readonly MVWebView mwv = new MVWebView();
         private bool isCertificateError = false;
 
@@ -77,6 +81,14 @@ namespace TMBrowser.UserControls
 
             set
             {
+            }
+        }
+
+        public NewWindowCreateEvent NeedNeeWindowEvent
+        {
+            set
+            {
+                windowCreateEvt = value;
             }
         }
 
@@ -239,6 +251,16 @@ namespace TMBrowser.UserControls
 
             mwv.NotifyPropertyChange("CertificateErrorVisibility");
             mwv.NotifyPropertyChange("CertificateOKVisibility");
+        }
+
+        private void Webview_NewWindow(object sender, NewWindowEventArgs e)
+        {
+            if (windowCreateEvt != null)
+            {
+                windowCreateEvt(sender, e);
+            }
+
+            e.Accepted = false;
         }
     }
 }

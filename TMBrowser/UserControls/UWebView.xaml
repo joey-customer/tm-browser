@@ -91,7 +91,8 @@
         </Border>
         <eo:WebControl Name="webControl" Background="AliceBlue">
             <eo:WebControl.WebView>
-                <eo:WebView x:Name="webview" 
+                <eo:WebView x:Name="webview"
+                            NewWindow="Webview_NewWindow"
                             CertificateError="Webview_CertificateError"
                             BeforeSendHeaders="Webview_BeforeSendHeaders"
                             ScriptCallDone="Webview_ScriptCallDone"

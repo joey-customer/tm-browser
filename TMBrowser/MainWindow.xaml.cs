@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using TMBrowser.ModelViews;
 
 namespace TMBrowser
@@ -27,10 +28,18 @@ namespace TMBrowser
             browser.NotifyHeightChanged(e.NewSize.Height);
         }
 
-        //private void MyGif_MediaEnded(object sender, RoutedEventArgs e)
-        //{
-        //    myGif.Position = new TimeSpan(0, 0, 1);
-        //    myGif.Play();
-        //}
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (tabMain.Items.Count <= 1)
+            {
+                //Must have at least 1 tab item.
+                return;
+            }
+
+            Button btn = (Button) sender;
+            var obj = (MVTabItem) btn.Tag;
+
+            browser.RemoveTabItem(obj);
+        }
     }
 }

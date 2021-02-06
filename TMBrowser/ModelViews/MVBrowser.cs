@@ -1,9 +1,13 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using EO.WebBrowser;
 
 namespace TMBrowser.ModelViews
 {
     public class MVBrowser : MVBase
     {
+        private double height;
+
         private readonly string homeUrl = "https://rta.mi.th/";
         private readonly ObservableCollection<MVTabItem> tabItems = new ObservableCollection<MVTabItem>();
 
@@ -18,7 +22,11 @@ namespace TMBrowser.ModelViews
             //tabItems.Add(item);
 
             var item = new MVTabItem("Google", "www.google.com", areaHeight, homeUrl);
-            tabItems.Add(item);
+            item.ContentControl.NeedNeeWindowEvent = Webview_NewWindow;
+
+            tabItems.Add(item);            
+
+            height = areaHeight;
         }
 
         public void NotifyHeightChanged(double areaHeight)
@@ -27,6 +35,19 @@ namespace TMBrowser.ModelViews
             {
                 item.NotifyHeightChanged(areaHeight);
             }
+        }
+
+        public void RemoveTabItem(MVTabItem item)
+        {
+            tabItems.Remove(item);
+        }
+
+        private void Webview_NewWindow(object sender, NewWindowEventArgs e)
+        {
+            var item = new MVTabItem(e.TargetUrl.Substring(0, 10), e.TargetUrl, height, homeUrl);
+            item.ContentControl.NeedNeeWindowEvent = Webview_NewWindow;
+
+            tabItems.Add(item);
         }
     }
 }

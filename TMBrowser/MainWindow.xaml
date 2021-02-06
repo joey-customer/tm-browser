@@ -86,6 +86,8 @@
                                    VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
 
                         <Button Width="20" Height="20" Style="{StaticResource MyBtnStyle}" 
+                                Tag="{Binding RefKey}"
+                                Click="Button_Click"
                                 Margin="3"
                                 ToolTip="ปิด"
                                 VerticalAlignment="Center"
