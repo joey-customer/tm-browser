@@ -8,7 +8,7 @@ namespace TMBrowser.ModelViews
     {
         private double height;
 
-        private readonly string homeUrl = "https://rta.mi.th/";
+        private readonly string homeUrl = "https://tm-frontend-test-6y377xz4cq-as.a.run.app/"; //"https://cld-center.rta.mi.th/login";
         private readonly ObservableCollection<MVTabItem> tabItems = new ObservableCollection<MVTabItem>();
 
         public ObservableCollection<MVTabItem> TabItems
@@ -18,10 +18,7 @@ namespace TMBrowser.ModelViews
 
         public void InitStartTab(double areaHeight)
         {
-            //var item = new MVTabItem("Royal Thai Army", "https://rta.mi.th/", areaHeight, homeUrl);
-            //tabItems.Add(item);
-
-            var item = new MVTabItem("Google", "www.google.com", areaHeight, homeUrl);
+            var item = new MVTabItem("Google", homeUrl, areaHeight, homeUrl);
             item.ContentControl.NeedNeeWindowEvent = Webview_NewWindow;
 
             tabItems.Add(item);            
